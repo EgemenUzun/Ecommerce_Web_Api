@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.RabbitMQ.QueueSender;
+import com.example.demo.dao.CustomerRepository;
+import com.example.demo.entity.Customer;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -20,9 +22,11 @@ public class ProductController {
     private final ProductService productService;
     private final QueueSender queueSender;
 
-    public ProductController(ProductService productService, QueueSender queueSender) {
+    private  final CustomerRepository customerRepository;
+    public ProductController(ProductService productService, QueueSender queueSender, CustomerRepository customerRepository) {
         this.productService = productService;
         this.queueSender = queueSender;
+        this.customerRepository = customerRepository;
     }
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
@@ -41,7 +45,7 @@ public class ProductController {
         return randomProduct;
     }
 
-    @Scheduled(fixedRate = 60000)//120000
+    @Scheduled(fixedRate = 3000)//120000
     public Product Discount()
     {
         List<Product> products = productService.getAllProducts();
@@ -53,8 +57,15 @@ public class ProductController {
         BigDecimal result = BigDecimal.valueOf(value);
         randomProduct.setUnitPrice(result);
         System.out.println(randomProduct.getId()+"/"+randomProduct.getName());
-        queueSender.send("New discount arrived check the mambers page for the opportunity");
+        queueSender.send("New discount arrived for "+'"'+getRandomCustomer().getEmail()+'"');
         return randomProduct;
+    }
+    Customer getRandomCustomer(){
+        List<Customer> customers = customerRepository.findAll();
+        Random random = new Random();
+        int randomIndex = random.nextInt(customers.size());
+        Customer randomCustomer = customers.get(randomIndex);
+        return  randomCustomer;
     }
 
 }

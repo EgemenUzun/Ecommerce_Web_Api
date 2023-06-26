@@ -16,22 +16,13 @@ public class SenderConfig {
 
     @Value("${routing.key}")
     private String routingKey;
-
-    @Value("${queue.name}")
-    private String queueName;
-
-    @Bean
-    public Queue queue() {
-        return new Queue(queueName, true);
-    }
-
     @Bean
     public FanoutExchange exchange() {
         return new FanoutExchange(exchangeName);
     }
 
     @Bean
-    public Binding binding(FanoutExchange exchange, Queue queue) {
-        return BindingBuilder.bind(queue).to(exchange);
+    public Binding binding(FanoutExchange exchange) {
+        return BindingBuilder.bind(exchange).to(exchange);
     }
 }
