@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -10,12 +11,21 @@ import java.math.BigDecimal;
 @Table(name="order_item")
 @Getter
 @Setter
+@NoArgsConstructor
 public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
+
+    public OrderItem(Long id, String imageUrl, BigDecimal unitPrice, int quantity, Long productId) {
+        this.id = id;
+        this.imageUrl = imageUrl;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+        this.productId = productId;
+    }
 
     @Column(name="image_url")
     private String imageUrl;

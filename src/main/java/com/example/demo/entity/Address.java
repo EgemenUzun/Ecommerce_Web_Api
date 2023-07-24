@@ -1,13 +1,16 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="address")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Address {
 
     @Id
@@ -20,6 +23,15 @@ public class Address {
 
     @Column(name="city")
     private String city;
+
+    public Address(Long id, String street, String city, String state, String country, String zipCode) {
+        this.id = id;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.zipCode = zipCode;
+    }
 
     @Column(name="state")
     private String state;

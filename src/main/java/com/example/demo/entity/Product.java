@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 @Entity
 @Table(name="product")
 @Data
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,4 +50,16 @@ public class Product {
     @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdated;
+
+    public Product(Long id, Long categoryId, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, boolean active, int unitsInStock) {
+        this.id = id;
+        this.categoryId = categoryId;
+        this.sku = sku;
+        this.name = name;
+        this.description = description;
+        this.unitPrice = unitPrice;
+        this.imageUrl = imageUrl;
+        this.active = active;
+        this.unitsInStock = unitsInStock;
+    }
 }

@@ -44,8 +44,8 @@ public class CheckoutServiceImpl implements CheckoutService {
         Customer customer = purchase.getCustomer();
 
         // check if this an existing customer
-        String theEmail = customer.getEmail();
-        Customer customerFromDB = customerRepository.findByEmail(theEmail);
+        String username = customer.getUserName();
+        Customer customerFromDB = customerRepository.findByUserName(username);
         if(customerFromDB != null){
             //we found them
             customer = customerFromDB;

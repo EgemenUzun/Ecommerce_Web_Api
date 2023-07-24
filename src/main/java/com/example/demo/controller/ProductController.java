@@ -45,19 +45,19 @@ public class ProductController {
         return randomProduct;
     }
 
-    @Scheduled(fixedRate = 3000)//120000
+    @Scheduled(fixedRate = 120000)//120000
     public Product Discount()
     {
         List<Product> products = productService.getAllProducts();
         Random random = new Random();
-        int randomIndex = random.nextInt(100);
+        int randomIndex = random.nextInt(products.size());
         randomProduct = products.get(randomIndex);
         double value = randomProduct.getUnitPrice().doubleValue();
         value -= value* 0.3;
         BigDecimal result = BigDecimal.valueOf(value);
         randomProduct.setUnitPrice(result);
         System.out.println(randomProduct.getId()+"/"+randomProduct.getName());
-        queueSender.send("New discount arrived for "+'"'+getRandomCustomer().getEmail()+'"');
+        queueSender.send("New discount arrived for "+getRandomCustomer().getUserName());
         return randomProduct;
     }
     Customer getRandomCustomer(){

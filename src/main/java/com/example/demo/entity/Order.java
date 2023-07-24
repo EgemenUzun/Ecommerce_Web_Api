@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,12 +14,24 @@ import java.util.*;
 @Table(name="orders")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
+
+    public Order(Long id, String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, String status, Set<OrderItem> orderItems, Address shippingAddress, Address billingAddress) {
+        this.id = id;
+        this.orderTrackingNumber = orderTrackingNumber;
+        this.totalQuantity = totalQuantity;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.orderItems = orderItems;
+        this.shippingAddress = shippingAddress;
+        this.billingAddress = billingAddress;
+    }
 
     @Column(name="order_tracking_number")
     private String orderTrackingNumber;
