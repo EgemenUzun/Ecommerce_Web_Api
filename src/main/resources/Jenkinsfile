@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    tools {
+        jdk 'jdk'
+        maven '3.9.3'
+    }
+    stages {
+        stage("build project") {
+            steps {
+                bat 'java -version'
+                bat 'mvn -version'
+            }
+        }
+    }
+}
