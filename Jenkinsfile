@@ -16,5 +16,11 @@ pipeline {
                 bat 'start mvn spring-boot:run'
              }
         }
+
+        stage('Trigger Angular Job') {
+              steps {
+                 build 'E-Commerce Pipline'
+              }
+        }
     }
 }
