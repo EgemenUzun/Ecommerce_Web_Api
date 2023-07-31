@@ -17,9 +17,9 @@ pipeline {
              }
         }
 
-        stage('Trigger Angular Job') {
+        stage('Trigger Authentication Api Job') {
               steps {
-                 build 'Pipeline'
+                 build 'Authentication Api'
               }
         }
     }
