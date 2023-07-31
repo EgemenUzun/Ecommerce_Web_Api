@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Run App') {
              steps {
-                bat 'mvn spring-boot:run'
+                bat 'start mvn spring-boot:run'
              }
         }
         stage('Trigger Authentication Api Job') {
