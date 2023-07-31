@@ -16,5 +16,15 @@ pipeline {
                 bat 'start mvn spring-boot:run'
              }
         }
+        stage('Trigger Authentication Api Job') {
+            steps {
+                build job:'Authentication Api',wait: true
+            }
+        }
+        stage('Trigger Angular Job') {
+            steps {
+                build job:'Pipeline' , wait:true
+            }
+        }
     }
 }
