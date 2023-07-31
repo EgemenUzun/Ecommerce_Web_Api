@@ -19,7 +19,7 @@ pipeline {
 
         stage('Trigger Authentication Api Job') {
               steps {
-                 build 'Authentication Api'
+                 build 'Authentication Api',wait: true
               }
         }
     }
