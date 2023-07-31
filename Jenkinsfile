@@ -19,7 +19,7 @@ pipeline {
 
         stage('Trigger Angular Job') {
               steps {
-                 build 'E-Commerce Pipline'
+                 build 'Pipeline'
               }
         }
     }
