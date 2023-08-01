@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Run App') {
              steps {
-                bat 'JENKINS_NODE_COOKIE=dontKillMe && start mvn spring-boot:run'
+                bat 'mvn spring-boot:run'
              }
         }
         stage('Trigger Authentication Api Job') {
