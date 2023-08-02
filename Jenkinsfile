@@ -26,10 +26,5 @@ pipeline {
                 build job:'Pipeline' , wait:true
             }
         }
-        stage('Close API'){
-            steps{
-                bat 'runas /user:Administrator "C:\\Users\\Egemen\\VSCode\\CloseAPI.bat"'
-            }
-        }
     }
 }
