@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Run App') {
              steps {
-                bat """set JENKINS_NODE_COOKIE=dontKillMe && start /min mvn spring-boot:run """
+                bat """start /min mvn spring-boot:run """
              }
         }
         stage('Trigger Authentication Api Job') {
