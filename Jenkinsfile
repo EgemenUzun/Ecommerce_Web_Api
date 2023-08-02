@@ -26,5 +26,25 @@ pipeline {
                 build job:'Pipeline' , wait:true
             }
         }
+        stage('Close API'){
+            steps{
+                bat '''@echo off
+                setlocal
+
+                set "PORT_TO_CLOSE=8081"
+
+                for /f "tokens=5" %%a in (\'netstat -ano ^| findstr :%PORT_TO_CLOSE%\') do (
+                    set "PID=%%a"
+                )
+
+                if not defined PID (
+                    echo 8081 portunu kullanan herhangi bir uygulama bulunamadi.
+                ) else (
+                    taskkill /F /PID %PID%
+                )
+
+                pause'''
+            }
+        }
     }
 }
