@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Close API'){
             steps{
-                bat 'Powershell -Command "& { Start-Process \"C:\\Users\\Egemen\\VSCode\\CloseAPI.bat\" -verb RunAs}'
+                bat 'runas /user:Egemen /savecred  C:\\Users\\Egemen\\VSCode\\CloseAPI.bat'
             }
         }
     }
