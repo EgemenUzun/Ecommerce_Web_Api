@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Close API'){
             steps{
-                build """Powershell -Command "& { Start-Process \"C:\\Users\\Egemen\\VSCode\\CloseAPI.bat\" -verb RunAs}"""
+                bat """"Powershell -Command "& { Start-Process \"C:\\Users\\Egemen\\VSCode\\CloseAPI.bat\" -verb RunAs}"""
             }
         }
     }
